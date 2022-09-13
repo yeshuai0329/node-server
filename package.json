@@ -1,0 +1,14 @@
+{
+  "name": "node-server-pc",
+  "version": "0.0.0",
+  "private": true,
+  "description": "服务于 vue 和 react 的服务器",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "express": "~4.16.1",
+    "mysql": "^2.18.1"
+  }
+}
