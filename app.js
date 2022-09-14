@@ -1,8 +1,8 @@
 /* 生成 express 服务 */
 const express = require('express');
 const app = express();
-const middleware = require('./middleware')
-const indexRouter = require('./routes/index');
+const middleware = require('./src/middleware')
+const indexRouter = require('./src/routes/index');
 const PORT = 8080
 
 /* 中间件处理 */
