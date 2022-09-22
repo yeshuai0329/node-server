@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const middleware = require('./src/middleware')
 const indexRouter = require('./src/routes/index');
-const PORT = 8080
+const PORT = 8090
 
 /* 中间件处理 */
 middleware(app)

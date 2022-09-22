@@ -7,13 +7,13 @@ const config = {
   database: 'node-server-pc'
 }
 
-const dbConnect = async (sql, callback) => {
+const dbConnect = async (sql, conditionArr, callback) => {
   const pool = mysql.createPool(config)
 
   pool.getConnection((err, conn) => {
     if (err) throw err
     // 事件驱动的回调
-    conn.query(sql, callback)
+    conn.query(sql, conditionArr, callback)
     conn.release()
   })
 }

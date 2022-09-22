@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const requestTime = require('./requestTime')
-const respTemplate = require('./respTemplate')
+const { successTemplate, failTemplate } = require('./respTemplate')
 const path = require('path');
 
 
@@ -15,5 +15,6 @@ module.exports = function middleware(app) {
   /* 第三方中间件 */
   app.use(cookieParser());
   app.use(requestTime)
-  app.use(respTemplate)
+  app.use(successTemplate)
+  app.use(failTemplate)
 }

@@ -4,7 +4,8 @@
   "private": true,
   "description": "服务于 vue 和 react 的服务器",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "build": "node app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

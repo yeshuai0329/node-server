@@ -1,16 +1,31 @@
 const codeMapMessage = require('../utils/responseCode/codeMapMessage')
 const { SUCCESS } = require('../utils/responseCode/code')
 
-/* 响应模版 */
-const respTemplate = (req, res, next) => {
-  res.respTemplate = (result, message) => {
+/* 响应成功的模版 */
+const successTemplate = (req, res, next) => {
+  res.successTemplate = (data) => {
     return {
-      code: result ? SUCCESS : message,
-      message: codeMapMessage[result ? SUCCESS : message],
-      data: result || []
+      code: SUCCESS,
+      message: codeMapMessage[SUCCESS],
+      data: data || []
     }
   }
   next()
 }
 
-module.exports = respTemplate
+/* 响应失败的模版 */
+const failTemplate = (req, res, next) => {
+  res.failTemplate = (failCode) => {
+    return {
+      code: failCode,
+      message: codeMapMessage[failCode],
+      data: []
+    }
+  }
+  next()
+}
+
+module.exports = {
+  successTemplate,
+  failTemplate
+}

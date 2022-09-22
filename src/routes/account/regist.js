@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { registController } = require('../../controllers/accoutController/regist')
 
 /* 账号注册相关 */
-router.post('/', (req, res) => {
-  const requestTime = req.requestTime
-  res.send(requestTime)
-})
+router.post('/', registController)
 
 module.exports = router;
