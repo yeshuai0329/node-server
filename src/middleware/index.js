@@ -18,7 +18,9 @@ module.exports = function middleware(app) {
   app.use(cookieParser());
   app.use(headerConfig)
   app.use(requestTime)
-  app.use(successTemplate)
   app.use(failTemplate)
-  app.use(/^((?!^\/account\/(login|regist)$).)*$/, verifyToken)
+  app.use(successTemplate)
+  app.use(verifyToken)
+ 
+
 }

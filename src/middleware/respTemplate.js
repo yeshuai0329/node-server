@@ -15,11 +15,11 @@ const successTemplate = (req, res, next) => {
 
 /* 响应失败的模版 */
 const failTemplate = (req, res, next) => {
-  res.failTemplate = (failCode) => {
+  res.failTemplate = (failCode, data) => {
     return {
       code: failCode,
       message: codeMapMessage[failCode],
-      data: []
+      data: data || []
     }
   }
   next()

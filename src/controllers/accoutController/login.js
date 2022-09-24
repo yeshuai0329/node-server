@@ -16,16 +16,20 @@ const loginController = (req, res) => {
       if (result && !!result.length) {
         const [userInfo] = result
         const token = JWT.generateToken(result[0].id)
-        const refreshToken = JWT.generateRefreshToken(result[0].id)
-        res.send(res.successTemplate({
+        const refreshtoken = JWT.generateRefreshToken(result[0].id)
+        console.log('token.', token)
+        console.log('refreshtoken.', refreshtoken)
+        console.log('verifyToken.', JWT.verifyToken(token))
+        console.log('verifyRefreshToken.', JWT.verifyRefreshToken(refreshtoken))
+        return res.send(res.successTemplate({
           accountNumber: userInfo.accountNumber,
           nickName: userInfo.nickName,
           phoneNumber: userInfo.phoneNumber,
           token: token,
-          refreshToken: refreshToken
+          refreshtoken: refreshtoken
         }))
       } else {
-        res.send(res.failTemplate(ACCOUNT_NOT_REGIST))
+        return res.send(res.failTemplate(ACCOUNT_NOT_REGIST))
       }
     })
   }

@@ -13,7 +13,7 @@ const headerConfig = (req, res, next) => {
     // 允许http请求携带cookie
     res.header("Access-Control-Allow-Credentials", true);
     // 允许http请求设置的请求头
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, content-type, token, refreshToken')
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, content-type, token, refreshtoken')
     next()
   } else {
     next()
