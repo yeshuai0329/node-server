@@ -5,7 +5,8 @@ const sel_acc_pass_sql = `
         account_number AS accountNumber,
         pass_word AS passWord,
         phone_number AS phoneNumber,
-        id_number AS idNumber
+        id_number AS idNumber,
+        nick_name AS nickName
       FROM 
         users
       WHERE

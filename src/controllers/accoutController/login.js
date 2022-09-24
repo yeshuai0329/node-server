@@ -1,6 +1,7 @@
 const { ACCOUNT_NOT_REGIST } = require('../../utils/responseCode/code')
 const dbConnect = require('../../utils/mysqlConfig')
 const { sel_acc_pass_sql } = require('../../sql/accountSql')
+const JWT = require('../../utils/jwt')
 
 // 登录的逻辑
 const loginController = (req, res) => {
@@ -13,7 +14,16 @@ const loginController = (req, res) => {
       if (err) return console.log('执行失败：' + err.message)
 
       if (result && !!result.length) {
-        res.send(res.successTemplate(result[0]))
+        const [userInfo] = result
+        const token = JWT.generateToken(result[0].id)
+        const refreshToken = JWT.generateRefreshToken(result[0].id)
+        res.send(res.successTemplate({
+          accountNumber: userInfo.accountNumber,
+          nickName: userInfo.nickName,
+          phoneNumber: userInfo.phoneNumber,
+          token: token,
+          refreshToken: refreshToken
+        }))
       } else {
         res.send(res.failTemplate(ACCOUNT_NOT_REGIST))
       }
