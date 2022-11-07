@@ -14,6 +14,8 @@ const headerConfig = (req, res, next) => {
     res.header("Access-Control-Allow-Credentials", true);
     // 允许http请求设置的请求头
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, content-type, token, refreshtoken')
+    // 设置前端允许读取的响应头
+    res.header('Access-Control-Expose-Headers', 'token, refreshtoken')
     next()
   } else {
     next()

@@ -17,10 +17,6 @@ const loginController = (req, res) => {
         const [userInfo] = result
         const token = JWT.generateToken(result[0].id)
         const refreshtoken = JWT.generateRefreshToken(result[0].id)
-        console.log('token.', token)
-        console.log('refreshtoken.', refreshtoken)
-        console.log('verifyToken.', JWT.verifyToken(token))
-        console.log('verifyRefreshToken.', JWT.verifyRefreshToken(refreshtoken))
         return res.send(res.successTemplate({
           accountNumber: userInfo.accountNumber,
           nickName: userInfo.nickName,

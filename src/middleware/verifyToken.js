@@ -1,6 +1,6 @@
 const JWT = require("../utils/jwt")
 const whiteApiList = require('../utils/whiteApiList')
-const { REQ_NO_TOKEN_OR_REFRESHTOKEN, REQ_TOKEN_AND_REFRESHTOKEN_OVERDUE,TOKEN_OVERDUE_NEED_REFRESH } = require('../utils/responseCode/code')
+const { REQ_NO_TOKEN_OR_REFRESHTOKEN, REQ_TOKEN_AND_REFRESHTOKEN_OVERDUE, TOKEN_OVERDUE_NEED_REFRESH } = require('../utils/responseCode/code')
 
 
 /* 验证token */
@@ -16,19 +16,19 @@ const verifyToken = (req, res, next) => {
     // 如果用户未携带 token
     if (!token || !refreshtoken) {
       return res.send(res.failTemplate(REQ_NO_TOKEN_OR_REFRESHTOKEN))
-    }  else {
-      console.log('token', token)
-      console.log('refreshtoken', refreshtoken)
-      console.log('JWT.verifyToken(token)', JWT.verifyToken(token))
-      console.log('JWT.verifyRefreshToken(refreshtoken)', JWT.verifyRefreshToken(refreshtoken))
+    } else {
       // 用户携带 token 但是 token 有效
       if (JWT.verifyToken(token)) {
+        const data = JWT.verifyToken(token)
+        res.header('token',JWT.generateToken(data.id))
+        res.header('refreshtoken',JWT.generateRefreshToken(data.id))
         next()
       } else {
-        // 用户携带 token 但是 token 失效
+        // 用户携带 refreshtoken, 并且 refreshtoken 有效
         if (JWT.verifyRefreshToken(refreshtoken)) {
           const data = JWT.verifyRefreshToken(refreshtoken)
-          
+          res.header('token',JWT.generateToken(data.id))
+          res.header('refreshtoken',JWT.generateRefreshToken(data.id))
           // refreshtoken 有效
           return res.send(res.failTemplate(TOKEN_OVERDUE_NEED_REFRESH, {
             token: JWT.generateToken(data.id),
