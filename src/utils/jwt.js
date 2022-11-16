@@ -1,8 +1,8 @@
 const jsonwebtoken = require('jsonwebtoken')
 const tokenSecret = 'token-yedashuaiyyds'
 const refreshTokenSecret = 'refreshToken-yedashuaiyyds'
-const tokenExpiresIn = '10s'
-const refreshTokenExpiresIn = '1100s'
+const tokenExpiresIn = '2h'
+const refreshTokenExpiresIn = '4h'
 
 const JWT = {
   // 生成token
